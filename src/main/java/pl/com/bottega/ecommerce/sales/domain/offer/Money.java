@@ -8,25 +8,21 @@ public class Money {
 
     private String currency;
 
-    public Money(BigDecimal value){
-        this(value,"PLN");
+    public Money(BigDecimal value) {
+        this(value, "PLN");
     }
 
-    public Money(BigDecimal value,String currency){
+    public Money(BigDecimal value, String currency) {
         this.value = value;
-        this.currency=currency;
+        this.currency = currency;
     }
-
 
     public BigDecimal getValue() {
         return value;
     }
 
-
-
     public String getCurrency() {
         return currency;
     }
-
 
 }
