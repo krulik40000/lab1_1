@@ -27,14 +27,12 @@ public class OfferItem {
     // discount
     private Discount discount;
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
-            String productType, int quantity) {
+    public OfferItem(Product product, int quantity) {
         this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
     }
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
-            String productType, int quantity, BigDecimal discount, String discountCause) {
-        this.product = new Product(productId,productName,productSnapshotDate,productType,productPrice,null);
+    public OfferItem(Product Product, int quantity, BigDecimal discount, String discountCause) {
+        this.product = product;
 
         this.quantity = quantity;
         this.discount = new Discount(discount,null,discountCause);
@@ -131,24 +129,14 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (product.getName() == null) {
-            if (other.product.getName() != null) {
+        if (product.equals(null) {
+            if (other.product.equals(null) {
                 return false;
             }
         } else if (!product.getName().equals(other.product.getName())) {
             return false;
-        }
-        if (product.getPrice() == null) {
-            if (other.product.getPrice() != null) {
-                return false;
-            }
         } else if (!product.getPrice().equals(other.product.getPrice())) {
             return false;
-        }
-        if (product.getId() == null) {
-            if (other.product.getId() != null) {
-                return false;
-            }
         } else if (!product.getId().equals(other.product.getId())) {
             return false;
         }
