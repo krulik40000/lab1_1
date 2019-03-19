@@ -28,7 +28,7 @@ public class OfferItem {
     private Discount discount;
 
     public OfferItem(Product product, int quantity) {
-        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
+        this(product, quantity, null, null);
     }
 
     public OfferItem(Product Product, int quantity, BigDecimal discount, String discountCause) {
