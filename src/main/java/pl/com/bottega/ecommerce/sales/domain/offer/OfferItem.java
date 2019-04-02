@@ -35,14 +35,17 @@ public class OfferItem {
         this.product = product;
 
         this.quantity = quantity;
-        this.discount = new Discount(discount,null,discountCause);
+        this.discount = new Discount(discount, null, discountCause);
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
             discountValue = discountValue.subtract(discount);
         }
 
-        this.totalCost = new Money(productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue));
+        this.totalCost = new Money(product.getPrice()
+                                          .getValue()
+                                          .multiply(new BigDecimal(quantity))
+                                          .subtract(discountValue));
     }
 
     public String getProductId() {
@@ -65,8 +68,6 @@ public class OfferItem {
         return product.getType();
     }
 
-
-
     public Discount getDiscount() {
         return discount;
     }
@@ -78,8 +79,6 @@ public class OfferItem {
     public int getQuantity() {
         return quantity;
     }
-
-
 
     @Override
     public int hashCode() {
@@ -129,18 +128,11 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (product.equals(null) {
-            if (other.product.equals(null) {
+        if (product.equals(null)) {
+            if (other.product.equals(null)) {
                 return false;
             }
-        } else if (!product.getName().equals(other.product.getName())) {
-            return false;
-        } else if (!product.getPrice().equals(other.product.getPrice())) {
-            return false;
-        } else if (!product.getId().equals(other.product.getId())) {
-            return false;
-        }
-        if (product.getType() != other.product.getType()) {
+        } else if (!product.equals(other.product)) {
             return false;
         }
 
@@ -150,7 +142,8 @@ public class OfferItem {
 
         BigDecimal max;
         BigDecimal min;
-        if (totalCost.getValue().compareTo(other.totalCost.getValue()) > 0) {
+        if (totalCost.getValue()
+                     .compareTo(other.totalCost.getValue()) > 0) {
             max = totalCost.getValue();
             min = other.totalCost.getValue();
         } else {
