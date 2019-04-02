@@ -128,15 +128,8 @@ public class OfferItem {
      * @return
      */
     public boolean sameAs(OfferItem other, double delta) {
-        if (product.equals(null)) {
-            if (other.product.equals(null)) {
-                return false;
-            }
-        } else if (!product.equals(other.product)) {
-            return false;
-        }
 
-        if (quantity != other.quantity) {
+        if (!product.equals(other.product)) {
             return false;
         }
 
